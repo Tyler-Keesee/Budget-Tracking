@@ -33,3 +33,7 @@ With the server running, open **http://localhost:8000/** in Edge or Chrome. Pres
 ---
 
 Help Save and Track Money
+
+## Verified static PWA assets
+
+The previously missing `favicon.png` and `manifest.json` references were repaired with a bundled SVG icon and an actual manifest. Clone and launch using the PowerShell commands above. PWA install support varies by browser/platform; the manifest and basic file checks are CI-verified, while actual install/offline support requires manual browser testing.
