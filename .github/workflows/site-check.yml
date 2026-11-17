@@ -1,0 +1,16 @@
+name: Budget static site check
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check main.js
+      - name: Verify referenced icons and manifest
+        run: node -e "const fs=require('fs');const html=fs.readFileSync('index.html','utf8');const m=JSON.parse(fs.readFileSync('manifest.json','utf8'));if(!html.includes('favicon.svg')||!html.includes('manifest.json')||!fs.existsSync('favicon.svg')||m.icons.some(i=>!fs.existsSync(i.src)))process.exit(1)"
